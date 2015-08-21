@@ -47,28 +47,8 @@ class Player
     @marker = marker
   end
 end
-=begin
-class Square
-  def initialize(value)
-    @value = value
-  end
-  def value_empty?
-    @value == ' '
-  end 
-  def mark(marker)
-    @value = marker
-  end
-  def to_s
-    @value 
-  end
-end
-=end
+
 class Game
-  user_hand = ""
-  comp_hand = ""
-  user_choices = []
-  comp_choices = []
-  
   def initialize
     @human = Player.new("Bob", "X")
     @computer = Player.new("Computer", "O")
