@@ -1,0 +1,18 @@
+1- Describe the problem
+2- Extract major nouns and verbs
+3- Organize the verbs with the nouns 
+4- The nouns become classes (probably) and verbs methods 
+
+1-
+It is a game with a board with 9 spaces. Two players one 
+against each other. Each player plays with an X or an O and
+chooses per turns a space. Once one of them has accomplished
+3-in-a-row wins.
+
+2-
+class GAME init
+    class BOARD
+    class PLAYERS
+        def Choose
+    
+    module Check winner
