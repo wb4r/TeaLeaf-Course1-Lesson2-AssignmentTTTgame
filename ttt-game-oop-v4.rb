@@ -1,4 +1,5 @@
 
+
 class Board
   attr_accessor :players_inputs
   WIN_ARRAYS = [[1,2,3], [4,5,6], [7,8,9], [1,4,7], [2,5,8], [3,6,9], [1,5,9], [3,5,7]]
@@ -17,11 +18,9 @@ class Board
   
   def three_squares?(symbol)
     WIN_ARRAYS.each do |combo|      
-      if @players_inputs[combo[0]] == symbol && @players_inputs[combo[1]]  == symbol && @players_inputs[combo[2]] == symbol
-        return true 
+      return true if @players_inputs[combo[0]] == symbol && @players_inputs[combo[1]]  == symbol && @players_inputs[combo[2]] == symbol
       end
       false
-    end
   end
 
   def displaying_board 
@@ -49,6 +48,7 @@ class Player
     @name = name
     @symbol = symbol
   end
+  
   def to_s
     "#{self.name}"
   end
@@ -78,6 +78,7 @@ class Game
         puts "Please, choose an empty square: "
         position = gets.chomp.to_i
       end until @board.empty_positions.include?(position)
+      
     else
       position = @board.empty_positions.sample
     end
@@ -111,7 +112,6 @@ class Game
 
   def play
     @board = Board.new
-    
     begin 
       alternate_player 
       @board.displaying_board
