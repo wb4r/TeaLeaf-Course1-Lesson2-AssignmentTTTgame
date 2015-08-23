@@ -18,11 +18,11 @@ class Board
   
   def three_squares?(symbol)
     WIN_ARRAYS.each do |combo|      
-      return true if @players_inputs[combo[0]] == symbol && @players_inputs[combo[1]]  == symbol && @players_inputs[combo[2]] == symbol
-      end
-      false
+      return true if combo.all? { |square| @players_inputs[square] == symbol } 
+    end
+    false
   end
-
+  
   def displaying_board 
     system 'clear'
     puts "     |     |     "
@@ -78,27 +78,37 @@ class Game
         puts "Please, choose an empty square: "
         position = gets.chomp.to_i
       end until @board.empty_positions.include?(position)
-      
     else
       position = @board.empty_positions.sample
     end
-      symbol = @current_player.symbol
-      @board.mark_square(position, symbol)
-      @board.displaying_board
+    symbol = @current_player.symbol
+    @board.mark_square(position, symbol)
+    @board.displaying_board
   end
   
   def current_player_wins?(current_player)
     if @board.three_squares?(@current_player.symbol)
+      result = "winner"
+      display_result(result)
+    end
+  end
+  
+  def its_a_tie?
+    if @board.three_squares?(@current_player.symbol) == false && @board.empty_positions.empty?
+      result = "tie"
+      display_result(result)
+    end
+    false
+  end
+  
+  def display_result(result)
+    if result == "tie"
+      puts "It's a tie!"
+    else
       puts "#{@current_player} wins!!"
     end
   end
-
-  def its_a_tie?
-    if @board.three_squares?(@current_player.symbol) == false && @board.empty_positions.empty?
-      puts "It's a tie!"
-    end
-  end
-
+  
   def replay?
     puts ""
     puts "Do you want to play again?"
@@ -123,4 +133,4 @@ class Game
   end
 end
 
-new_game = Game.new.play
+Game.new.play
